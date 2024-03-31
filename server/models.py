@@ -22,7 +22,6 @@ class WorkoutProgram(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
     focus_area = db.Column(db.String)
-    difficulty = db.Column(db.String)
 
     sessions = db.relationship('Session', back_populates = 'workout_program')
 
@@ -33,6 +32,7 @@ class Session(db.Model, SerializerMixin):
     
     id = db.Column(db.Integer, primary_key = True)
     notes = db.Column(db.String)
+    date = db.Column(db.DateTime, default = db.func.now())
 
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
     workout_program_id = db.Column(db.Integer, db.ForeignKey('workout_programs.id'))

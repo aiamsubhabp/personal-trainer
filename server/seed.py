@@ -1,6 +1,47 @@
 from config import app, db
+from models import Client, WorkoutProgram, Session
+import datetime
 
 if __name__ == "__main__":
   with app.app_context():
-    pass
-    # remove pass and write your seed data
+    print('Deleting all records...')
+    Session.query.delete()
+    Client.query.delete()
+    WorkoutProgram.query.delete()
+
+    print('Seeding...')
+
+    c1 = Client(name = 'Mario', age = 25, weight = 150, goals = 'I want to jump higher' )
+    c2 = Client(name = 'John', age = 56, weight = 150, goals = 'I want keep up with my grandkids' )
+    c3 = Client(name = 'Sasha', age = 24, weight = 130, goals = 'Be a better soccer player' )
+
+    db.session.add_all([c1, c2, c3])
+    db.session.commit()
+
+    w1 = WorkoutProgram(name = 'Dynamic Strength Routine', focus_area = 'full body, strength and cardiovascular endurance')
+    w2 = WorkoutProgram(name = 'Core Stability', focus_area = 'core, strength and stability')
+    w3 = WorkoutProgram(name = 'Cardio Conditioning', focus_area = 'cardiovascular endurance and fat burning')
+    w4 = WorkoutProgram(name = 'General Muscle Building Routine', focus_area = 'build lean muscle and burn fat with this resistance training routine')
+    w5 = WorkoutProgram(name = 'Speed and Agility Training', focus_area = 'improve speed and agility incorporating drills/exercises used by athletes')
+    w6 = WorkoutProgram(name = 'Explosive Power', focus_area = 'combines explosive movements and plyometrics')
+
+    db.session.add_all([w1, w2, w3, w4, w5, w6])
+    db.session.commit()
+
+    c1_w5 = Session(notes = 'Mario excelled in agility drills, demonstrating quick reflexes and precise footwork. His agility and balance were remarkable, showcasing his readiness for fast-paced challenges.', date = datetime.datetime(2024, 3, 21), client = c1, workout_program = w5)
+    c1_w6 = Session(notes = "In the explosive power session, Mario displayed impressive strength and explosiveness. His jumps were powerful and controlled, showing significant improvement in sprinting speed. Mario's dedication and intensity were evident, impressing the trainers with his potential for explosive strength.", date = datetime.datetime(2024, 3, 22), client = c1, workout_program = w6)
+
+    c2_w4 = Session(notes = "John demonstrated consistent effort and commitment in the muscle-building routine. Despite initial challenges, he steadily improved his strength and form over time. ", client = c2, workout_program = w4)
+
+    c3_c6 = Session(notes = "Sasha exhibited impressive speed and agility during the training sessions. Her quick reflexes and nimble footwork were evident as she maneuvered through agility drills with precision. Sasha's ability to change direction swiftly and maintain control over her movements showed her readiness to excel on the soccer field.", client = c3, workout_program = w6)
+
+    db.session.add_all([c1_w5, c1_w6, c2_w4, c3_c6])
+    db.session.commit()
+
+
+
+
+
+
+
+
