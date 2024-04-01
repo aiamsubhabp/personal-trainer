@@ -96,10 +96,33 @@ class WorkoutPrograms(Resource):
     
 api.add_resource(WorkoutPrograms, '/api/workoutprograms')
 
+class Sessions(Resource):
+  def get(self):
+    sessions = Session.query.all()
+    sessions_dict = [session.to_dict() for session in sessions]
 
+    return sessions_dict, 200
+  
+  def post(self):
+    data = request.get_json()
 
+    new_session = Session(
+      notes = data['notes'],
+      date = data['date'],
+      client_id = data['client_id'],
+      workout_program_id = data['workout_program_id'],
+      # client = data['client'],
+      # workout_program = data['workout_program']
+    )
 
+    try:
+      db.session.add(new_session)
+      db.session.commit()
+      return new_session.to_dict(), 201
+    except:
+      return 'Failed to create new session', 400
 
+api.add_resource(Sessions, '/api/sessions')
 
 
 if __name__ == "__main__":
