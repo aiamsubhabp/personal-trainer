@@ -72,6 +72,31 @@ class ClientsById(Resource):
   
 api.add_resource(ClientsById, '/api/clients/<int:id>')
 
+class WorkoutPrograms(Resource):
+  def get(self):
+    workout_programs = WorkoutProgram.query.all()
+    workout_programs_dict = [workout_program.to_dict() for workout_program in workout_programs]
+
+    return workout_programs_dict, 200
+
+  def post(self):
+    data = request.get_json()
+
+    new_workout_program = WorkoutProgram(
+      name = data['name'],
+      focus_area = data['focus_area']
+    )
+
+    try:
+      db.session.add(new_workout_program)
+      db.session.commit()
+      return new_workout_program.to_dict(), 201
+    except:
+      return 'Failed to create new workout program', 400
+    
+api.add_resource(WorkoutPrograms, '/api/workoutprograms')
+
+
 
 
 
