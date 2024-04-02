@@ -7,7 +7,17 @@ function App() {
   const [clients, setClients] = useState([])
 
   function handleDelete(deletedId){
-    console.log(deletedId)
+    fetch(`/api/clients/${deletedId}`, {
+      method: 'DELETE',
+    })
+      .then(r => {
+        if (r.status == 204) {
+          setClients(udpatedClients => udpatedClients.filter(client => client.id !== deletedId))
+        } else {
+          console.error("Failed to delete client")
+        }
+      })
+
   }
 
   useEffect(() => {
