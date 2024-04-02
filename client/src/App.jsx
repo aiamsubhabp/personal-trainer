@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './App.css'
 import NavBar from './components/NavBar'
 import ClientCard from './components/ClientCard'
 import Header from './components/Header'
@@ -7,9 +6,9 @@ import Header from './components/Header'
 function App() {
   const [clients, setClients] = useState([])
 
-  // const handleDelete(deletedClient){
-  //   fetch('')
-  // }
+  function handleDelete(deletedId){
+    console.log(deletedId)
+  }
 
   useEffect(() => {
     fetch('/api/clients')
@@ -19,11 +18,14 @@ function App() {
 
   const clientCard = clients.map(client => (
     <ClientCard 
+      id = {client.id}
       key = {client.id}
       name = {client.name}
       age = {client.age}
       weight = {client.weight}
       goals = {client.goals}
+      image = {client.image}
+      onDeleteItem = {handleDelete}
     />
   ))
 
@@ -31,7 +33,10 @@ function App() {
     <div className='app'>
       <Header />
       <NavBar />
-      {clientCard}
+      <ul className='cards'>
+        {clientCard}
+      </ul>
+      
     </div>
  
   )

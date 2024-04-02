@@ -11,9 +11,9 @@ if __name__ == "__main__":
 
     print('Seeding...')
 
-    c1 = Client(name = 'Mario', age = 25, weight = 150, goals = 'I want to jump higher' )
-    c2 = Client(name = 'John', age = 56, weight = 150, goals = 'I want keep up with my grandkids' )
-    c3 = Client(name = 'Sasha', age = 24, weight = 130, goals = 'Be a better soccer player' )
+    c1 = Client(name = 'Mario', age = 25, weight = 150, goals = 'I want to jump higher', image = 'https://media.istockphoto.com/id/1207856385/photo/joyful-happy-african-american-young-man-in-eyeglasses-portrait.jpg?s=612x612&w=0&k=20&c=M5sUFPE5xlF1fMxvNYgAqdpSZYKxSor3-SlF-o6IiJ0=' )
+    c2 = Client(name = 'John', age = 56, weight = 150, goals = 'I want keep up with my grandkids', image ='https://thumbs.dreamstime.com/b/happy-old-man-29232681.jpg' )
+    c3 = Client(name = 'Sasha', age = 24, weight = 130, goals = 'Be a better soccer player', image = 'https://as1.ftcdn.net/v2/jpg/02/58/89/62/1000_F_258896226_zVd0SsGv0ncRK7b6yZXmflz3Ekn2XT7M.jpg' )
 
     db.session.add_all([c1, c2, c3])
     db.session.commit()
