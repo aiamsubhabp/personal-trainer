@@ -15,6 +15,11 @@ function NavBar(){
                 className = 'nav-link'
             > Add a New Client
             </NavLink>
+            <NavLink
+                to = '/workoutform'
+                className = 'nav-link'
+            > Add a New Program
+            </NavLink>
         </nav>
     )
 }
