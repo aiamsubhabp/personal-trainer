@@ -11,6 +11,7 @@ class Client(db.Model, SerializerMixin):
     age = db.Column(db.Integer)
     weight = db.Column(db.Integer)
     goals = db.Column(db.String)
+    image = db.Column(db.String)
 
     sessions = db.relationship('Session', back_populates = 'client')
 

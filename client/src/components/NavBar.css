@@ -1,0 +1,23 @@
+.nav-link {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    margin: 0 15px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+}
+
+.nav-link:hover {
+    background-color: #45a049;
+}
+
+.active {
+    background-color: #ff9800;
+}
