@@ -1,10 +1,17 @@
 from sqlalchemy_serializer import SerializerMixin
-from config import db
+from config import db, metadata
+
+client_workout_programs = db.Table(
+    'client_workout_programs',
+    metadata,
+    db.Column('client_id', db.Integer, db.ForeignKey('clients.id'), primary_key = True),
+    db.Column('workout_program_id', db.Integer, db.ForeignKey('workout_programs.id'), primary_key = True)
+)
 
 class Client(db.Model, SerializerMixin):
     __tablename__ = 'clients'
-
-    serialize_rules = ('-sessions.client',)
+    # will need to update serialize
+    serialize_rules = ('-sessions.client', '-workout_programs')
     
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
@@ -14,17 +21,21 @@ class Client(db.Model, SerializerMixin):
     image = db.Column(db.String)
 
     sessions = db.relationship('Session', back_populates = 'client')
+    # add db relationship for workouts... secondary
+    workout_programs = db.relationship('WorkoutProgram', secondary = client_workout_programs, back_populates = 'clients')
 
 class WorkoutProgram(db.Model, SerializerMixin):
     __tablename__ = 'workout_programs'
 
-    serialize_rules = ('-sessions.workout_program',)
+    serialize_rules = ('-sessions.workout_program', '-clients')
     
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
     focus_area = db.Column(db.String)
 
     sessions = db.relationship('Session', back_populates = 'workout_program')
+    # add db relationship for clients... secondary
+    clients = db.relationship('Client', secondary = client_workout_programs, back_populates = 'workout_programs')
 
 class Session(db.Model, SerializerMixin):
     __tablename__ = 'sessions'

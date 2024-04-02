@@ -1,5 +1,5 @@
 from config import app, db
-from models import Client, WorkoutProgram, Session
+from models import Client, WorkoutProgram, Session, client_workout_programs
 import datetime
 
 if __name__ == "__main__":
@@ -8,6 +8,7 @@ if __name__ == "__main__":
     Session.query.delete()
     Client.query.delete()
     WorkoutProgram.query.delete()
+    db.session.query(client_workout_programs).delete()
 
     print('Seeding...')
 
@@ -36,6 +37,11 @@ if __name__ == "__main__":
     c3_c6 = Session(notes = "Sasha exhibited impressive speed and agility during the training sessions. Her quick reflexes and nimble footwork were evident as she maneuvered through agility drills with precision. Sasha's ability to change direction swiftly and maintain control over her movements showed her readiness to excel on the soccer field.", client = c3, workout_program = w6)
 
     db.session.add_all([c1_w5, c1_w6, c2_w4, c3_c6])
+    db.session.commit()
+
+
+    w1.clients.append(c1)
+
     db.session.commit()
 
 

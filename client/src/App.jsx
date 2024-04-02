@@ -4,6 +4,7 @@ import ClientCard from './components/ClientCard'
 import Header from './components/Header'
 
 function App() {
+
   const [clients, setClients] = useState([])
 
   function handleDelete(deletedId){
@@ -28,6 +29,7 @@ function App() {
 
   const clientCard = clients.map(client => (
     <ClientCard 
+      client = {client}
       id = {client.id}
       key = {client.id}
       name = {client.name}
@@ -36,6 +38,7 @@ function App() {
       goals = {client.goals}
       image = {client.image}
       onDeleteItem = {handleDelete}
+      setClients = {setClients}
     />
   ))
 

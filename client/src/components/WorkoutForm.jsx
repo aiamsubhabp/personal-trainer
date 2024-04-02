@@ -7,66 +7,7 @@ import Header from "./Header";
 
 // name, age, weight, goals
 
-function ClientForm(){
-    const [clients, setClients] = useState([{}])
-    const [submissionStatus, setSubmissionStatus] = useState(null)
-
-    const formSchema = yup.object().shape({
-        name: yup.string().required("Must enter a name").max(20),
-        age: yup
-            .number()
-            .positive()
-            .integer()
-            .required("Must enter age")
-            .typeError('Please enter a positive integer')
-            .max(120),
-        weight: yup
-            .number()
-            .positive()
-            .integer()
-            .required('Must enter weight (lbs)')
-            .typeError('Please enter a positive integer')
-            .max(999),
-        goals: yup
-            .string()
-            .required('Must enter client goal(s)')
-            .max(300),
-        image: yup.string()
-    })
-
-    const formik = useFormik({
-        initialValues: {
-            name: '',
-            age: '',
-            weight: '',
-            goals: '',
-            image: ''
-
-        },
-        validationSchema: formSchema,
-        onSubmit: (values, {resetForm}) => {
-            fetch('/api/clients', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(values),
-            })
-                .then(r => {
-                    if (r.ok) {
-                        setSubmissionStatus("success")
-                        r.json().then(res => {
-                            setClients(res)
-                            resetForm()
-                        })
-                    } else {
-                        console.error("Failed to add client.")
-                    }
-                })
-        }
-    })
-
-
+function WorkoutForm(){
 
     return(
         <div className="app">
@@ -133,4 +74,4 @@ function ClientForm(){
 }
 
 
-export default ClientForm
+export default WorkoutForm

@@ -21,7 +21,8 @@ class Clients(Resource):
       name = data['name'],
       age = data['age'],
       weight = data['weight'],
-      goals = data['goals']
+      goals = data['goals'],
+      image = data['image']
     )
 
     try:

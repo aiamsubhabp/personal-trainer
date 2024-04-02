@@ -157,3 +157,13 @@ input:focus {
     width: calc(20% - 2rem);
   }
 }
+
+.edit-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edit-container label {
+  margin-bottom: 5px;
+}
