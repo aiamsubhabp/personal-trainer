@@ -51,9 +51,11 @@ class ClientsById(Resource):
     
     try:
       data = request.get_json()
+      
       for attr in data:
-        setattr(client, attr, data[attr])
-
+        if attr != 'sessions':
+          setattr(client, attr, data[attr])
+        
       db.session.add(client)
       db.session.commit()
       return client.to_dict(), 202

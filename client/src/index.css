@@ -162,8 +162,28 @@ input:focus {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding: 1rem; /* Add padding for spacing */
 }
 
-.edit-container label {
-  margin-bottom: 5px;
+.edit-container input,
+.edit-container textarea {
+  margin-bottom: 10px; /* Add margin between input fields */
+  padding: 0.5rem; /* Add padding to input fields */
+  border: 1px solid #ccc; /* Add border for input fields */
+  border-radius: 5px; /* Add border radius for input fields */
+  width: 100%; /* Make input fields full width */
+}
+
+.edit-container button {
+  padding: 0.5rem 1.2rem;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: white;
+  width: 100%; /* Make buttons full width */
+}
+
+.edit-container button.cancel {
+  background-color: var(--secondary-color);
 }
