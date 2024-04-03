@@ -111,7 +111,6 @@ class Sessions(Resource):
 
     new_session = Session(
       notes = data['notes'],
-      date = data['date'],
       client_id = data['client_id'],
       workout_program_id = data['workout_program_id'],
       

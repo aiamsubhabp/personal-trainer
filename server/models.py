@@ -44,7 +44,6 @@ class Session(db.Model, SerializerMixin):
     
     id = db.Column(db.Integer, primary_key = True)
     notes = db.Column(db.String)
-    date = db.Column(db.DateTime, default = db.func.now())
 
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
     workout_program_id = db.Column(db.Integer, db.ForeignKey('workout_programs.id'))

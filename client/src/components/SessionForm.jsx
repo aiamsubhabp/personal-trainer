@@ -5,7 +5,7 @@ import NavBar from "./NavBar";
 import Header from "./Header";
 
 
-function SessionForm(){
+function SessionForm({clients, setClients, workouts, setWorkouts}){
     const [sessions, setSessions] = useState([{}])
     const [submissionStatus, setSubmissionStatus] = useState(null)
 
@@ -19,9 +19,8 @@ function SessionForm(){
     const formik = useFormik({
         initialValues: {
             notes: '',
-            date: '',
-            client_id: '',
-            workout_program_id: ''
+            client_id: null,
+            workout_program_id: null
         },
         validationSchema: formSchema,
         onSubmit: (values, {resetForm}) => {
@@ -46,6 +45,16 @@ function SessionForm(){
         }
     })
 
+    const clientOptions = clients.map(client => (
+        <option key={client.id} value={client.id}>{client.name}</option>
+
+    ))
+
+    const workoutOptions = workouts.map(workout => (
+        <option key={workout.id} value={workout.id}>{workout.name}</option>
+    ))
+
+
     return(
         <div className="app">
             <br />
@@ -61,16 +70,30 @@ function SessionForm(){
                     rows="4"
                     cols="50"
                 />
+                <p style = {{color:'red'}}> {formik.errors.notes}</p>
                 <br/>
+
+                <label>Select Client</label>
                 <select
                     name="client_id"
                     value={formik.values.client_id}
                     onChange={formik.handleChange} 
-                />
-                <option value="Option 1">select</option>
-                <p style = {{color:'red'}}> {formik.errors.notes}</p>
-                <br />
+                >   <option value={null}>Select Client</option>
+                    {clientOptions}
+                </select>
+                <p style = {{color:'red'}}> {formik.errors.client_id}</p>
+                <br/>
 
+                <label>Select Workout</label>
+                <select
+                    name="workout_program_id"
+                    value={formik.values.workout_program_id}
+                    onChange={formik.handleChange} 
+                >
+                    <option value={null}>Select Workout</option>
+                    {workoutOptions}
+                </select>
+                <p style = {{color:'red'}}> {formik.errors.workout_program_id}</p>
                 <button type = 'submit'>Submit</button>
             </form>
             {submissionStatus === "success" && <p>New program successfully added</p>} 

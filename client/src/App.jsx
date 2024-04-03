@@ -10,6 +10,7 @@ import ClientList from './components/ClientList'
 function App() {
 
   const [clients, setClients] = useState([])
+  const [workouts, setWorkouts] = useState([])
 
   function handleDelete(deletedId){
     console.log(deletedId)
@@ -30,7 +31,15 @@ function App() {
     fetch('/api/clients')
     .then((r => r.json()))
     .then(data => setClients(data))
-  }, [clients])
+  }, [])
+
+  useEffect(() => {
+    fetch('/api/workoutprograms')
+      .then((r => r.json()))
+      .then(data =>setWorkouts(data))
+  }, [])
+
+  
 
   return (
     <Router>
@@ -44,7 +53,13 @@ function App() {
         />
         <Route path='/clientform' element = {<ClientForm />}/>
         <Route path='/workoutform' element = {<WorkoutForm />} />
-        <Route path='/sessionform' element = { <SessionForm />} />
+        <Route path='/sessionform' element = { <SessionForm 
+          clients = {clients}
+          setClients = {setClients}
+          workouts = {workouts}
+          setWorkouts = {setWorkouts}
+          />} 
+        />
       </Routes>
     </Router>
   )

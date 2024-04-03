@@ -57,6 +57,7 @@ function ClientForm(){
                         setSubmissionStatus("success")
                         r.json().then(res => {
                             setClients(res)
+                            // console.log('Updated clients:', res)
                             resetForm()
                         })
                     } else {

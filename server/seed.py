@@ -29,8 +29,8 @@ if __name__ == "__main__":
     db.session.add_all([w1, w2, w3, w4, w5, w6])
     db.session.commit()
 
-    c1_w5 = Session(notes = 'Mario excelled in agility drills, demonstrating quick reflexes and precise footwork. His agility and balance were remarkable, showcasing his readiness for fast-paced challenges.', date = datetime.datetime(2024, 3, 21), client = c1, workout_program = w5)
-    c1_w6 = Session(notes = "In the explosive power session, Mario displayed impressive strength and explosiveness. His jumps were powerful and controlled, showing significant improvement in sprinting speed. Mario's dedication and intensity were evident, impressing the trainers with his potential for explosive strength.", date = datetime.datetime(2024, 3, 22), client = c1, workout_program = w6)
+    c1_w5 = Session(notes = 'Mario excelled in agility drills, demonstrating quick reflexes and precise footwork. His agility and balance were remarkable, showcasing his readiness for fast-paced challenges.', client = c1, workout_program = w5)
+    c1_w6 = Session(notes = "In the explosive power session, Mario displayed impressive strength and explosiveness. His jumps were powerful and controlled, showing significant improvement in sprinting speed. Mario's dedication and intensity were evident, impressing the trainers with his potential for explosive strength.", client = c1, workout_program = w6)
 
     c2_w4 = Session(notes = "John demonstrated consistent effort and commitment in the muscle-building routine. Despite initial challenges, he steadily improved his strength and form over time. ", client = c2, workout_program = w4)
 
