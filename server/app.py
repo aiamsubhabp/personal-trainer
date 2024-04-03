@@ -114,6 +114,7 @@ class Sessions(Resource):
       date = data['date'],
       client_id = data['client_id'],
       workout_program_id = data['workout_program_id'],
+      
       # client = data['client'],
       # workout_program = data['workout_program']
     )

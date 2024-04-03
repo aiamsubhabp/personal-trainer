@@ -70,8 +70,6 @@ function ClientForm(){
 
     return(
         <div className="app">
-            <Header />
-            <NavBar />
             <br />
             <h1>Add a New Client</h1>
             

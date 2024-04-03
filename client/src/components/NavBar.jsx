@@ -20,6 +20,11 @@ function NavBar(){
                 className = 'nav-link'
             > Add a New Program
             </NavLink>
+            <NavLink
+                to = '/sessionform'
+                className = 'nav-link'
+            > Add a New Session
+            </NavLink>
         </nav>
     )
 }

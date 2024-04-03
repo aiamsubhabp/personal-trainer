@@ -1,13 +1,18 @@
 import { useState, useEffect } from 'react'
 import NavBar from './components/NavBar'
-import ClientCard from './components/ClientCard'
 import Header from './components/Header'
+import ClientForm from './components/ClientForm'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import WorkoutForm from './components/WorkoutForm'
+import SessionForm from './components/SessionForm'
+import ClientList from './components/ClientList'
 
 function App() {
 
   const [clients, setClients] = useState([])
 
   function handleDelete(deletedId){
+    console.log(deletedId)
     fetch(`/api/clients/${deletedId}`, {
       method: 'DELETE',
     })
@@ -25,34 +30,37 @@ function App() {
     fetch('/api/clients')
     .then((r => r.json()))
     .then(data => setClients(data))
-  }, [])
-
-  const clientCard = clients.map(client => (
-    <ClientCard 
-      client = {client}
-      id = {client.id}
-      key = {client.id}
-      name = {client.name}
-      age = {client.age}
-      weight = {client.weight}
-      goals = {client.goals}
-      image = {client.image}
-      onDeleteItem = {handleDelete}
-      setClients = {setClients}
-    />
-  ))
+  }, [clients])
 
   return (
-    <div className='app'>
+    <Router>
       <Header />
       <NavBar />
-      <ul className='cards'>
-        {clientCard}
-      </ul>
-      
-    </div>
- 
+      <Routes>
+        <Route path='/' element = {<ClientList 
+          clients = {clients} 
+          setClients = {setClients} 
+          onDeleteItem = {handleDelete}/>}
+        />
+        <Route path='/clientform' element = {<ClientForm />}/>
+        <Route path='/workoutform' element = {<WorkoutForm />} />
+        <Route path='/sessionform' element = { <SessionForm />} />
+      </Routes>
+    </Router>
   )
 }
 
 export default App
+
+// return (
+//   <div className='app'>
+//     <Header />
+//     <NavBar />
+//     <ul className='cards'>
+//       {clientCard}
+//     </ul>
+    
+//   </div>
+
+// )
+// }
