@@ -1,7 +1,7 @@
 import ClientCard from "./ClientCard"
 
 function ClientList({clients, setClients, onDeleteItem}){
-
+    console.log(clients)
     const clientCard = clients.map(client => (
         <ClientCard 
           client = {client}

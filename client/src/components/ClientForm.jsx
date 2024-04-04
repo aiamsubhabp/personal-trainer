@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {useFormik} from "formik"
 import * as yup from "yup"
-import NavBar from "./NavBar";
-import Header from "./Header";
 
-// name, age, weight, goals
 
 function ClientForm({clients, setClients}){
     

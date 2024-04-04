@@ -15,6 +15,7 @@ function ClientCard({ client, id, name, age, weight, goals, image, onDeleteItem,
 
     const formik = useFormik({
         initialValues: {
+            id: id,
             name: name || '',
             age: age || '',
             weight: weight || '',
