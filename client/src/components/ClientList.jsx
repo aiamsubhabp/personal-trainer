@@ -19,10 +19,12 @@ function ClientList({clients, setClients, onDeleteItem}){
     
     return(
         <div className="app">
+            <header>
+                <h2>My Clients</h2>
+            </header>
             <ul className="cards">
                 {clientCard}
             </ul>
-            
         </div>
 
     )

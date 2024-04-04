@@ -57,8 +57,10 @@ function SessionForm({clients, setClients, workouts, setWorkouts}){
 
     return(
         <div className="app">
-            <br />
-            <h1>Add a New Session</h1>
+            <header>
+                <h2>Add a New Session</h2>
+            </header>
+            
             
             <form onSubmit={formik.handleSubmit} style={{ margin: "30px" }}>
                 <label htmlFor="notes">Notes:</label>

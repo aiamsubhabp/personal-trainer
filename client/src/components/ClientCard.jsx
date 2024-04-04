@@ -107,6 +107,8 @@ function ClientCard({ client, id, name, age, weight, goals, image, onDeleteItem,
                     <h5>Age: {age}</h5>
                     <h5>Weight: {weight}</h5>
                     <h5>Goals: {goals}</h5>
+                    <br></br>
+                    <Link to = {`/clients/${client.id}`} >View Sessions</Link>
                     <div className="btn-group">
                         <button onClick={() => setEditMode(id)}>Edit</button>
                         <button onClick={() => onDeleteItem(id)}>Delete</button>

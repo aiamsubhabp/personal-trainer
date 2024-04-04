@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import WorkoutForm from './components/WorkoutForm'
 import SessionForm from './components/SessionForm'
 import ClientList from './components/ClientList'
+import ClientSession from './components/ClientSessions'
 
 function App() {
 
@@ -30,7 +31,8 @@ function App() {
   useEffect(() => {
     fetch('/api/clients')
     .then((r => r.json()))
-    .then(data => setClients(data))
+    .then(data => {
+      setClients(data)})
   }, [])
 
   useEffect(() => {
@@ -51,7 +53,10 @@ function App() {
           setClients = {setClients} 
           onDeleteItem = {handleDelete}/>}
         />
-        <Route path='/clientform' element = {<ClientForm />}/>
+        <Route path='/clientform' element = {<ClientForm 
+          clients = {clients}
+          setClients = {setClients}
+        />}/>
         <Route path='/workoutform' element = {<WorkoutForm />} />
         <Route path='/sessionform' element = { <SessionForm 
           clients = {clients}
@@ -60,6 +65,7 @@ function App() {
           setWorkouts = {setWorkouts}
           />} 
         />
+        <Route path='/clients/:id' element = {<ClientSession clients = {clients}/>} />
       </Routes>
     </Router>
   )

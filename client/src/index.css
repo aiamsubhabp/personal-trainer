@@ -48,6 +48,14 @@ header h1 {
   color: var(--primary-color);
 }
 
+header h2 {
+  font-size: 2em;
+  font-weight: 900;
+  text-align: center;
+  padding: 0.5rem 0;
+  color: var(--primary-color);
+}
+
 .logo {
   font-size: 1.25em;
   padding-left: 0.5rem;
@@ -162,16 +170,16 @@ input:focus {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 1rem; /* Add padding for spacing */
+  padding: 1rem; 
 }
 
 .edit-container input,
 .edit-container textarea {
-  margin-bottom: 10px; /* Add margin between input fields */
-  padding: 0.5rem; /* Add padding to input fields */
-  border: 1px solid #ccc; /* Add border for input fields */
-  border-radius: 5px; /* Add border radius for input fields */
-  width: 100%; /* Make input fields full width */
+  margin-bottom: 10px; 
+  padding: 0.5rem; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+  width: 100%; 
 }
 
 .edit-container button {
@@ -181,9 +189,27 @@ input:focus {
   cursor: pointer;
   background-color: var(--primary-color);
   color: white;
-  width: 100%; /* Make buttons full width */
+  width: 100%; 
 }
 
 .edit-container button.cancel {
   background-color: var(--secondary-color);
+}
+
+.session-card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.session-card h4 {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.session-card h5 {
+  margin-bottom: 16px;
 }

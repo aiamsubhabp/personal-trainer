@@ -7,8 +7,8 @@ import Header from "./Header";
 
 // name, age, weight, goals
 
-function ClientForm(){
-    const [clients, setClients] = useState([{}])
+function ClientForm({clients, setClients}){
+    
     const [submissionStatus, setSubmissionStatus] = useState(null)
 
     const formSchema = yup.object().shape({
@@ -56,8 +56,8 @@ function ClientForm(){
                     if (r.ok) {
                         setSubmissionStatus("success")
                         r.json().then(res => {
-                            setClients(res)
-                            // console.log('Updated clients:', res)
+                            setClients([...clients, res])
+                            console.log('Updated clients:', res)
                             resetForm()
                         })
                     } else {
@@ -71,9 +71,9 @@ function ClientForm(){
 
     return(
         <div className="app">
-            <br />
-            <h1>Add a New Client</h1>
-            
+            <header>
+                <h2>Add a New Client</h2>
+            </header>
             <form onSubmit={formik.handleSubmit} style={{ margin: "30px" }}>
                 <label htmlFor="name">Name:</label>
                 <input 

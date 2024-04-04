@@ -48,8 +48,10 @@ function WorkoutForm(){
 
     return(
         <div className="app">
-            <br />
-            <h1>Add a New Workout Program</h1>
+            <header>
+                <h2>Add a New Workout Program</h2>
+            </header>
+        
             
             <form onSubmit={formik.handleSubmit} style={{ margin: "30px" }}>
                 <label htmlFor="name">Program Name:</label>
