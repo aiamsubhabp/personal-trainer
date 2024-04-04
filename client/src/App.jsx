@@ -56,8 +56,13 @@ function App() {
         <Route path='/clientform' element = {<ClientForm 
           clients = {clients}
           setClients = {setClients}
-        />}/>
-        <Route path='/workoutform' element = {<WorkoutForm />} />
+          />}
+        />
+        <Route path='/workoutform' element = {<WorkoutForm 
+          workouts = {workouts}
+          setWorkouts = {setWorkouts}
+          />} 
+        />
         <Route path='/sessionform' element = { <SessionForm 
           clients = {clients}
           setClients = {setClients}

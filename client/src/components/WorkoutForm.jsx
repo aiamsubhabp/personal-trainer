@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import {useFormik} from "formik"
 import * as yup from "yup"
-import NavBar from "./NavBar";
-import Header from "./Header";
 
 
-function WorkoutForm(){
-    const [workouts, setWorkouts] = useState([{}])
+
+function WorkoutForm({workouts, setWorkouts}){
+    // const [workouts, setWorkouts] = useState([{}])
     const [submissionStatus, setSubmissionStatus] = useState(null)
 
     const formSchema = yup.object().shape({
@@ -36,7 +34,7 @@ function WorkoutForm(){
                     if (r.ok) {
                         setSubmissionStatus("success")
                         r.json().then(res => {
-                            setWorkouts(res)
+                            setWorkouts([...workouts, res])
                             resetForm()
                         })
                     } else {
