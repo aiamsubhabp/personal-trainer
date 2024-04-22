@@ -7,6 +7,23 @@ from config import app
 
 from models import Client, WorkoutProgram, Session
 
+class ClientSessions(Resource):
+  def get(self, n):
+  #   clients = Client.query.filter(Client.sessions >= n).all()
+  #   clients_dict = [client.to_dict() for client in clients]
+    client_dicts = [client.to_dict() for client in Client.query.all() if len(client.sessions) >= n]
+    clients = Client.query.all()
+    client_sesssions = []
+    for client in clients:
+      if len(client.sessions) >= n:
+        client_sesssions.append(client)
+    
+    clients_dict = [client_session.to_dict() for client_session in client_sesssions]
+     
+    return clients_dict, 200
+
+api.add_resource(ClientSessions, '/api/client_sessions/<int:n>')
+
 class Clients(Resource):
   def get(self):
     clients = Client.query.all()
