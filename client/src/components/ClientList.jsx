@@ -1,7 +1,9 @@
 import ClientCard from "./ClientCard"
+import { useContext } from "react"
+import { clientsContext } from "../App"
 
-function ClientList({clients, setClients, onDeleteItem}){
-    console.log(clients)
+function ClientList({ onDeleteItem}){
+    const {clients, setClients} = useContext(clientsContext)
     const clientCard = clients.map(client => (
         <ClientCard 
           client = {client}

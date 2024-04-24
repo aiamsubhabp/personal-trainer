@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import {useFormik} from "formik"
 import * as yup from "yup"
+import { clientsContext } from "../App";
 
 
-function ClientForm({clients, setClients}){
+function ClientForm(){
+
+    const {clients, setClients} = useContext(clientsContext)
     
     const [submissionStatus, setSubmissionStatus] = useState(null)
 

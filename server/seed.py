@@ -1,6 +1,10 @@
 from config import app, db
-from models import Client, WorkoutProgram, Session, client_workout_programs
+from models import Client, WorkoutProgram, Session, client_workout_programs, User
 import datetime
+
+from faker import Faker
+
+fake = Faker()
 
 if __name__ == "__main__":
   with app.app_context():
@@ -8,6 +12,7 @@ if __name__ == "__main__":
     Session.query.delete()
     Client.query.delete()
     WorkoutProgram.query.delete()
+    User.query.delete()
     db.session.query(client_workout_programs).delete()
 
     print('Seeding...')
@@ -39,10 +44,36 @@ if __name__ == "__main__":
     db.session.add_all([c1_w5, c1_w6, c2_w4, c3_c6])
     db.session.commit()
 
-
     w1.clients.append(c1)
 
     db.session.commit()
+
+    #  Users
+    users = []
+    usernames = []
+
+    for i in range(5):
+      username = fake.first_name()
+      while username in usernames:
+        username = fake.first_name()
+      usernames.append(username)
+
+      user = User(
+        username = username,
+      )
+
+      user.password_hash = 'password'
+      users.append(user)
+
+    db.session.add_all(users)
+    db.session.commit()
+
+
+
+
+    
+
+  
 
 
 

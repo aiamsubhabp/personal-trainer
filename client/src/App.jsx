@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, createContext } from 'react'
 import NavBar from './components/NavBar'
 import Header from './components/Header'
 import ClientForm from './components/ClientForm'
@@ -7,6 +7,9 @@ import WorkoutForm from './components/WorkoutForm'
 import SessionForm from './components/SessionForm'
 import ClientList from './components/ClientList'
 import ClientSession from './components/ClientSessions'
+
+export const clientsContext = createContext([])
+export const workoutsContext = createContext([])
 
 function App() {
 
@@ -47,31 +50,33 @@ function App() {
     <Router>
       <Header />
       <NavBar />
-      <Routes>
-        <Route path='/' element = {<ClientList 
-          clients = {clients} 
-          setClients = {setClients} 
-          onDeleteItem = {handleDelete}/>}
-        />
-        <Route path='/clientform' element = {<ClientForm 
-          clients = {clients}
-          setClients = {setClients}
-          />}
-        />
-        <Route path='/workoutform' element = {<WorkoutForm 
-          workouts = {workouts}
-          setWorkouts = {setWorkouts}
-          />} 
-        />
-        <Route path='/sessionform' element = { <SessionForm 
-          clients = {clients}
-          setClients = {setClients}
-          workouts = {workouts}
-          setWorkouts = {setWorkouts}
-          />} 
-        />
-        <Route path='/clients/:id' element = {<ClientSession clients = {clients}/>} />
-      </Routes>
+      <clientsContext.Provider value={{clients, setClients}}>
+        <Routes>
+          <Route path='/' element = {<ClientList 
+            // clients = {clients} 
+            // setClients = {setClients} 
+            onDeleteItem = {handleDelete}/>}
+          />
+          <Route path='/clientform' element = {<ClientForm 
+            // clients = {clients}
+            // setClients = {setClients}
+            />}
+          />
+          <Route path='/workoutform' element = {<WorkoutForm 
+            workouts = {workouts}
+            setWorkouts = {setWorkouts}
+            />} 
+          />
+          <Route path='/sessionform' element = { <SessionForm 
+            clients = {clients}
+            setClients = {setClients}
+            workouts = {workouts}
+            setWorkouts = {setWorkouts}
+            />} 
+          />
+          <Route path='/clients/:id' element = {<ClientSession clients = {clients}/>} />
+        </Routes>
+      </clientsContext.Provider>
     </Router>
   )
 }

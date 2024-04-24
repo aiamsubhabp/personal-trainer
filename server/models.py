@@ -77,6 +77,7 @@ class Session(db.Model, SerializerMixin):
 
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
     workout_program_id = db.Column(db.Integer, db.ForeignKey('workout_programs.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     client = db.relationship('Client', back_populates = 'sessions')
     workout_program = db.relationship('WorkoutProgram', back_populates = 'sessions')

@@ -7,10 +7,10 @@ from config import app
 
 from models import Client, WorkoutProgram, Session, User
 
-@app.before_request
-def check_if_logged_in():
-  if not session.get('user_id'):
-    return {'error': '401 Unauthorized'}, 401
+# @app.before_request
+# def check_if_logged_in():
+#   if not session.get('user_id'):
+#     return {'error': '401 Unauthorized'}, 401
   
 class Signup(Resource):
   def post(self):
