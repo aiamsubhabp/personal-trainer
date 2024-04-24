@@ -1,11 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {useFormik} from "formik"
 import * as yup from "yup"
 import NavBar from "./NavBar";
 import Header from "./Header";
+import { workoutsContext } from "../App";
+import { clientsContext } from "../App";
 
 
-function SessionForm({clients, setClients, workouts, setWorkouts}){
+function SessionForm(){
+    const {clients, setClients} = useContext(clientsContext)
+    const {workouts, setWorkouts} = useContext(workoutsContext)
+
+
     const [sessions, setSessions] = useState([{}])
     const [submissionStatus, setSubmissionStatus] = useState(null)
 
@@ -36,7 +42,14 @@ function SessionForm({clients, setClients, workouts, setWorkouts}){
                         setSubmissionStatus("success")
                         r.json().then(res => {
                             setSessions(res)
-                            resetForm()
+                            resetForm({
+                                notes: '',
+                                client_id: null,
+                                workout_program_id: null
+                            })
+                            setTimeout(() => {
+                                setSubmissionStatus(null)
+                            },3000)
                         })
                     } else {
                         console.error("Failed to add session.")
@@ -53,7 +66,6 @@ function SessionForm({clients, setClients, workouts, setWorkouts}){
     const workoutOptions = workouts.map(workout => (
         <option key={workout.id} value={workout.id}>{workout.name}</option>
     ))
-
 
     return(
         <div className="app">
@@ -78,7 +90,7 @@ function SessionForm({clients, setClients, workouts, setWorkouts}){
                 <label>Select Client</label>
                 <select
                     name="client_id"
-                    value={formik.values.client_id}
+                    value={formik.values.client_id || ''}
                     onChange={formik.handleChange} 
                 >   <option value={null}>Select Client</option>
                     {clientOptions}
@@ -89,7 +101,7 @@ function SessionForm({clients, setClients, workouts, setWorkouts}){
                 <label>Select Workout</label>
                 <select
                     name="workout_program_id"
-                    value={formik.values.workout_program_id}
+                    value={formik.values.workout_program_id || ''}
                     onChange={formik.handleChange} 
                 >
                     <option value={null}>Select Workout</option>

@@ -59,6 +59,9 @@ function ClientForm(){
                             setClients([...clients, res])
                             console.log('Updated clients:', res)
                             resetForm()
+                            setTimeout(() => {
+                                setSubmissionStatus(null)
+                            }, 3000);
                         })
                     } else {
                         console.error("Failed to add client.")

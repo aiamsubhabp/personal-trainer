@@ -51,6 +51,7 @@ function App() {
       <Header />
       <NavBar />
       <clientsContext.Provider value={{clients, setClients}}>
+      <workoutsContext.Provider value = {{workouts, setWorkouts}}>
         <Routes>
           <Route path='/' element = {<ClientList 
             // clients = {clients} 
@@ -63,19 +64,20 @@ function App() {
             />}
           />
           <Route path='/workoutform' element = {<WorkoutForm 
-            workouts = {workouts}
-            setWorkouts = {setWorkouts}
+            // workouts = {workouts}
+            // setWorkouts = {setWorkouts}
             />} 
           />
           <Route path='/sessionform' element = { <SessionForm 
-            clients = {clients}
-            setClients = {setClients}
-            workouts = {workouts}
-            setWorkouts = {setWorkouts}
+            // clients = {clients}
+            // setClients = {setClients}
+            // workouts = {workouts}
+            // setWorkouts = {setWorkouts}
             />} 
           />
           <Route path='/clients/:id' element = {<ClientSession clients = {clients}/>} />
         </Routes>
+        </workoutsContext.Provider>
       </clientsContext.Provider>
     </Router>
   )

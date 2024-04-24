@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useParams } from "react-router-dom"
+import { clientsContext } from "../App"
 
 function ClientSession({clients}){
     const [clientSessions, setClientSessions] = useState([])

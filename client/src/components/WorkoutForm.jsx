@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {useFormik} from "formik"
 import * as yup from "yup"
+import { workoutsContext } from "../App";
 
 
 
-function WorkoutForm({workouts, setWorkouts}){
-    // const [workouts, setWorkouts] = useState([{}])
+function WorkoutForm(){
+    const {workouts, setWorkouts} = useContext(workoutsContext)
     const [submissionStatus, setSubmissionStatus] = useState(null)
 
     const formSchema = yup.object().shape({
@@ -36,6 +37,9 @@ function WorkoutForm({workouts, setWorkouts}){
                         r.json().then(res => {
                             setWorkouts([...workouts, res])
                             resetForm()
+                            setTimeout(() => {
+                                setSubmissionStatus(null)
+                            }, 3000);
                         })
                     } else {
                         console.error("Failed to add program.")
