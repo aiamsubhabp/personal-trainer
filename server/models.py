@@ -52,3 +52,12 @@ class Session(db.Model, SerializerMixin):
     workout_program = db.relationship('WorkoutProgram', back_populates = 'sessions')
 
 
+# Note, currently no relationship. if we do add in the users, we will need to create the relationship
+class Appointment(db.Model, SerializerMixin):
+    __tablename__ = 'appointments'
+
+    id = db.Column(db.Integer, primary_key = True)
+    client_name = db.Column(db.String)
+    appointment_time = db.Column(db.DateTime)
+
+
