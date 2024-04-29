@@ -41,7 +41,7 @@ const AppointmentsCalendar = ({ appointments, setAppointments }) => {
             return
         }
 
-        // FORMAT DATE TIME
+        // FORMAT TIME
         const formattedAppointmentTime = appointmentTime.toISOString().split('T')[0] + ' ' + (hour < 10 ? '0' + hour : hour) + ':' + (minute < 10 ? '0' + minute : minute)
 
         const appointment = {
@@ -84,7 +84,11 @@ const AppointmentsCalendar = ({ appointments, setAppointments }) => {
         
         <form onSubmit={formik.handleSubmit}>
             <div>
-            <Calendar onChange={date => formik.setFieldValue('date', date)} value={formik.values.date} />
+            <Calendar 
+                onChange={date => formik.setFieldValue('date', date)} 
+                value={formik.values.date} 
+                showNeighboringMonth = {false}
+            />
             {formik.touched.date && formik.errors.date ? <div>{formik.errors.date}</div> : null}
             </div>
             <div>
