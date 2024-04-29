@@ -9,7 +9,7 @@ function ClientForm({clients, setClients}){
     const [submissionStatus, setSubmissionStatus] = useState(null)
 
     const formSchema = yup.object().shape({
-        name: yup.string().required("Must enter a name").max(20),
+        name: yup.string().required("Must enter a name").max(50),
         age: yup
             .number()
             .positive()

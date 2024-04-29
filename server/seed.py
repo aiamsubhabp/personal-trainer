@@ -1,5 +1,5 @@
 from config import app, db
-from models import Client, WorkoutProgram, Session, client_workout_programs
+from models import Client, WorkoutProgram, Session, client_workout_programs, Appointment
 import datetime
 
 if __name__ == "__main__":
@@ -8,6 +8,7 @@ if __name__ == "__main__":
     Session.query.delete()
     Client.query.delete()
     WorkoutProgram.query.delete()
+    Appointment.query.delete()
     db.session.query(client_workout_programs).delete()
 
     print('Seeding...')
@@ -43,6 +44,35 @@ if __name__ == "__main__":
     w1.clients.append(c1)
 
     db.session.commit()
+
+    # Function to round up to the nearest half-hour
+    def round_up_to_half_hour(dt):
+        minutes = dt.minute
+        if minutes <= 30:
+            return dt.replace(minute=30, second=0, microsecond=0)
+        else:
+            return dt.replace(hour=dt.hour + 1, minute=0, second=0, microsecond=0)
+
+    # Create appointments
+    now = datetime.datetime.now()
+
+    # Round up the current time to the nearest half-hour
+    rounded_now = round_up_to_half_hour(now)
+
+    # Create two appointments that have already passed
+    past_appointment1 = Appointment(client_name=c1.name, appointment_time=rounded_now - datetime.timedelta(days=1, hours=2, minutes=30))
+    past_appointment2 = Appointment(client_name=c2.name, appointment_time=rounded_now - datetime.timedelta(days=1, hours=1))
+
+    # Create two appointments for the future in 30-minute increments
+    future_appointment1 = Appointment(client_name=c3.name, appointment_time=rounded_now + datetime.timedelta(days=1, hours=12))
+    future_appointment2 = Appointment(client_name=c1.name, appointment_time=rounded_now + datetime.timedelta(days=2, hours=9))
+
+    db.session.add_all([past_appointment1, past_appointment2, future_appointment1, future_appointment2])
+    db.session.commit()
+
+
+
+
 
 
 

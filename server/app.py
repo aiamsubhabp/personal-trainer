@@ -4,8 +4,9 @@ from flask_migrate import Migrate
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from config import app
+from datetime import datetime
 
-from models import Client, WorkoutProgram, Session
+from models import Client, WorkoutProgram, Session, Appointment
 
 class Clients(Resource):
   def get(self):
@@ -126,6 +127,52 @@ class Sessions(Resource):
       return 'Failed to create new session', 400
 
 api.add_resource(Sessions, '/api/sessions')
+
+class Appointments(Resource):
+  def get(self):
+    appointments = Appointment.query.all()
+    appointments_dict = [appointment.to_dict() for appointment in appointments]
+
+    return appointments_dict, 200
+  
+  # def post(self):
+  #   data = request.get_json()
+  #   # appointment = Appointment(
+  #   #   client_name = data['client_name'],
+  #   #   appointment_time = data['appointment_time']
+  #   # )
+
+  #   try:
+  #     appointment_time = datetime.strptime(data['appointment_time'], '%Y-%m-%dT%H:%M:%S')
+  #     appointment = Appointment(
+  #       client_name = data['client_name'],
+  #       appointment_time = appointment_time
+  #     )
+  #     db.session.add(appointment)
+  #     db.session.commit()
+  #     return appointment.to_dict(), 201
+  #   except:
+  #     return 'Failed to create appointment', 400
+    
+  def post(self):
+    data = request.get_json()
+    
+    try:
+      appointment_time = datetime.strptime(data['appointment_time'], '%Y-%m-%d %H:%M')
+      appointment = Appointment(
+        client_name = data['client_name'],
+        appointment_time = appointment_time
+      )
+      db.session.add(appointment)
+      db.session.commit()
+      return appointment.to_dict(), 201
+    except KeyError as e:
+      return f'Missing key in data: {e}', 400
+    except ValueError as e:
+      return f'Invalid value for appointment_time: {e}', 400
+    except Exception as e:
+      return f'Failed to create appointment: {e}', 400
+api.add_resource(Appointments, '/api/appointments')
 
 
 if __name__ == "__main__":

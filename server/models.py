@@ -1,5 +1,6 @@
 from sqlalchemy_serializer import SerializerMixin
 from config import db, metadata
+import datetime
 
 client_workout_programs = db.Table(
     'client_workout_programs',

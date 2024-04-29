@@ -25,6 +25,11 @@ function NavBar(){
                 className = 'nav-link'
             > Add a New Session
             </NavLink>
+            <NavLink
+                to = '/mycalendar'
+                className = 'nav-link'
+            > My Schedule
+            </NavLink>
         </nav>
     )
 }
