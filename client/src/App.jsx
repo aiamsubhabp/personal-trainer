@@ -8,34 +8,34 @@ import SessionForm from './components/SessionForm'
 import ClientList from './components/ClientList'
 import ClientSession from './components/ClientSessions'
 import AppointmentsCalendar from './components/AppointmentsCalendar'
+import { ClientsContext, ClientsProvider } from './context/ClientsContext'
 
 function App() {
 
-  const [clients, setClients] = useState([])
+  // const [clients, setClients] = useState([])
   const [workouts, setWorkouts] = useState([])
   const [appointments, setAppointments] = useState([])
 
-  function handleDelete(deletedId){
-    console.log(deletedId)
-    fetch(`/api/clients/${deletedId}`, {
-      method: 'DELETE',
-    })
-      .then(r => {
-        if (r.status == 204) {
-          setClients(udpatedClients => udpatedClients.filter(client => client.id !== deletedId))
-        } else {
-          console.error("Failed to delete client")
-        }
-      })
+  // function handleDelete(deletedId){
+  //   console.log(deletedId)
+  //   fetch(`/api/clients/${deletedId}`, {
+  //     method: 'DELETE',
+  //   })
+  //     .then(r => {
+  //       if (r.status == 204) {
+  //         setClients(udpatedClients => udpatedClients.filter(client => client.id !== deletedId))
+  //       } else {
+  //         console.error("Failed to delete client")
+  //       }
+  //     })
+  // }
 
-  }
-
-  useEffect(() => {
-    fetch('/api/clients')
-    .then((r => r.json()))
-    .then(data => {
-      setClients(data)})
-  }, [])
+  // useEffect(() => {
+  //   fetch('/api/clients')
+  //   .then((r => r.json()))
+  //   .then(data => {
+  //     setClients(data)})
+  // }, [])
 
   useEffect(() => {
     fetch('/api/workoutprograms')
@@ -55,15 +55,17 @@ function App() {
     <Router>
       <Header />
       <NavBar />
+      <ClientsProvider>
       <Routes>
         <Route path='/' element = {<ClientList 
-          clients = {clients} 
-          setClients = {setClients} 
-          onDeleteItem = {handleDelete}/>}
+          // clients = {clients} 
+          // setClients = {setClients} 
+          // onDeleteItem = {handleDelete}
+          />}
         />
         <Route path='/clientform' element = {<ClientForm 
-          clients = {clients}
-          setClients = {setClients}
+          // clients = {clients}
+          // setClients = {setClients}
           />}
         />
         <Route path='/workoutform' element = {<WorkoutForm 
@@ -72,16 +74,19 @@ function App() {
           />} 
         />
         <Route path='/sessionform' element = { <SessionForm 
-          clients = {clients}
-          setClients = {setClients}
+          // clients = {clients}
+          // setClients = {setClients}
           workouts = {workouts}
           setWorkouts = {setWorkouts}
           />} 
         />
-        <Route path='/clients/:id' element = {<ClientSession clients = {clients}/>} />
+        <Route path='/clients/:id' element = {<ClientSession 
+        // clients = {clients}
+        />} />
         <Route path='/mycalendar' element = {<AppointmentsCalendar appointments = {appointments} setAppointments = {setAppointments}/>} />
         
       </Routes>
+      </ClientsProvider>
     </Router>
   )
 }

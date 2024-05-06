@@ -1,7 +1,10 @@
+import { useContext } from "react"
 import ClientCard from "./ClientCard"
+import { ClientsContext } from "../context/ClientsContext"
 
-function ClientList({clients, setClients, onDeleteItem}){
-    console.log(clients)
+function ClientList({onDeleteItem}){
+    // console.log(clients)
+    const {clients, setClients} = useContext(ClientsContext)
     const clientCard = clients.map(client => (
         <ClientCard 
           client = {client}
@@ -12,8 +15,8 @@ function ClientList({clients, setClients, onDeleteItem}){
           weight = {client.weight}
           goals = {client.goals}
           image = {client.image}
-          onDeleteItem = {onDeleteItem}
-          setClients = {setClients}
+        //   onDeleteItem = {onDeleteItem}
+        //   setClients = {setClients}
         />
       ))
     

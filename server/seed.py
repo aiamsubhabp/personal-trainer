@@ -46,12 +46,22 @@ if __name__ == "__main__":
     db.session.commit()
 
     # Function to round up to the nearest half-hour
+    # def round_up_to_half_hour(dt):
+    #     minutes = dt.minute
+    #     if minutes <= 30:
+    #         return dt.replace(minute=30, second=0, microsecond=0)
+    #     else:
+    #         return dt.replace(hour=dt.hour + 1, minute=0, second=0, microsecond=0)
+        
     def round_up_to_half_hour(dt):
-        minutes = dt.minute
-        if minutes <= 30:
-            return dt.replace(minute=30, second=0, microsecond=0)
-        else:
-            return dt.replace(hour=dt.hour + 1, minute=0, second=0, microsecond=0)
+      minutes = dt.minute
+      if dt.hour == 23:
+          # If the current hour is 23, set the hour to 0 and add a day
+          return dt.replace(hour=0, minute=30, second=0, microsecond=0) + datetime.timedelta(days=1)
+      elif minutes <= 30:
+          return dt.replace(minute=30, second=0, microsecond=0)
+      else:
+          return dt.replace(hour=dt.hour + 1, minute=0, second=0, microsecond=0)
 
     # Create appointments
     now = datetime.datetime.now()
@@ -69,15 +79,3 @@ if __name__ == "__main__":
 
     db.session.add_all([past_appointment1, past_appointment2, future_appointment1, future_appointment2])
     db.session.commit()
-
-
-
-
-
-
-
-
-
-
-
-

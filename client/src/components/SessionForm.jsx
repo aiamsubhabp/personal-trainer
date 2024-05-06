@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {useFormik} from "formik"
 import * as yup from "yup"
 import NavBar from "./NavBar";
 import Header from "./Header";
+import { ClientsContext } from "../context/ClientsContext";
 
 
-function SessionForm({clients, setClients, workouts, setWorkouts}){
+function SessionForm({workouts, setWorkouts}){
+    const {clients, setClients} = useContext(ClientsContext)
     const [sessions, setSessions] = useState([{}])
     const [submissionStatus, setSubmissionStatus] = useState(null)
 

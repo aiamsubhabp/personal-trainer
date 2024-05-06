@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { ClientsContext } from "../context/ClientsContext";
 
-function ClientCard({ client, id, name, age, weight, goals, image, onDeleteItem, setClients }) {
+function ClientCard({ client, id, name, age, weight, goals, image }) {
+    const {setClients, onDeleteItem} = useContext(ClientsContext)
     const [editMode, setEditMode] = useState(null);
 
     const formSchema = Yup.object().shape({

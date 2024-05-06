@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { ClientsContext } from "../context/ClientsContext"
 
-function ClientSession({clients}){
+function ClientSession(){
+    const {clients} = useContext(ClientsContext)
     const [clientSessions, setClientSessions] = useState([])
     const params = useParams()
     const clientId = params.id
