@@ -53,7 +53,7 @@ const AppointmentsCalendar = () => {
             appointment_time: formattedAppointmentTime,
         }
 
-        console.log('Creating appointment:', appointment)
+        // console.log('Creating appointment:', appointment)
 
         try {
             const response = await fetch('/api/appointments', {

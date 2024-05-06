@@ -8,6 +8,7 @@ import { WorkoutsContext } from "../context/WorkoutsContext";
 function SessionForm(){
     const {clients, setClients} = useContext(ClientsContext)
     const {workouts, setWorkouts} = useContext(WorkoutsContext)
+
     const [sessions, setSessions] = useState([{}])
     const [submissionStatus, setSubmissionStatus] = useState(null)
 
@@ -38,7 +39,14 @@ function SessionForm(){
                         setSubmissionStatus("success")
                         r.json().then(res => {
                             setSessions(res)
-                            resetForm()
+                            resetForm({
+                                notes: '',
+                                client_id: null,
+                                workout_program_id: null
+                            })
+                            setTimeout(() => {
+                                setSubmissionStatus(null)
+                            }, 3000);
                         })
                     } else {
                         console.error("Failed to add session.")
@@ -80,7 +88,7 @@ function SessionForm(){
                 <label>Select Client</label>
                 <select
                     name="client_id"
-                    value={formik.values.client_id}
+                    value={formik.values.client_id || ''}
                     onChange={formik.handleChange} 
                 >   <option value={null}>Select Client</option>
                     {clientOptions}
@@ -91,7 +99,7 @@ function SessionForm(){
                 <label>Select Workout</label>
                 <select
                     name="workout_program_id"
-                    value={formik.values.workout_program_id}
+                    value={formik.values.workout_program_id || ''}
                     onChange={formik.handleChange} 
                 >
                     <option value={null}>Select Workout</option>
@@ -108,12 +116,3 @@ function SessionForm(){
 
 
 export default SessionForm
-
-                {/* <label htmlFor="date">Date:</label>
-                <input 
-                    id = 'date'
-                    name = 'date'
-                    onChange={formik.handleChange}
-                    value={formik.values.date}            
-                />
-                <p style = {{color:'red'}}> {formik.errors.date}</p> */}

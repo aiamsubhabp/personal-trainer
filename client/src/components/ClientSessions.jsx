@@ -9,7 +9,7 @@ function ClientSession(){
     const clientId = params.id
 
     const clientObj = clients.find(client => client.id == clientId)
-    console.log(clientObj)
+    // console.log(clientObj)
 
     useEffect(() => {
         fetch(`/api/clients/${clientId}`)

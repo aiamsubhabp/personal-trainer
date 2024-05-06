@@ -6,12 +6,11 @@ import { WorkoutsContext } from "../context/WorkoutsContext";
 
 
 function WorkoutForm(){
-    // const [workouts, setWorkouts] = useState([{}])
     const {workouts, setWorkouts} = useContext(WorkoutsContext)
     const [submissionStatus, setSubmissionStatus] = useState(null)
 
     const formSchema = yup.object().shape({
-        name: yup.string().required("Must enter a name").max(20),
+        name: yup.string().required("Must enter a name").max(50),
         focus_area: yup
             .string()
             .required('Must enter program focus area')
@@ -38,6 +37,9 @@ function WorkoutForm(){
                         r.json().then(res => {
                             setWorkouts([...workouts, res])
                             resetForm()
+                            setTimeout(() => {
+                                setSubmissionStatus(null)
+                            }, 3000);
                         })
                     } else {
                         console.error("Failed to add program.")
