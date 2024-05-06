@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import NavBar from './components/NavBar'
 import Header from './components/Header'
 import ClientForm from './components/ClientForm'
@@ -8,13 +7,14 @@ import SessionForm from './components/SessionForm'
 import ClientList from './components/ClientList'
 import ClientSession from './components/ClientSessions'
 import AppointmentsCalendar from './components/AppointmentsCalendar'
-import { ClientsContext, ClientsProvider } from './context/ClientsContext'
+import { ClientsProvider } from './context/ClientsContext'
+import { WorkoutsProvider } from './context/WorkoutsContext'
+import { AppointmentsProvider } from './context/AppointmentsContext'
 
 function App() {
-
   // const [clients, setClients] = useState([])
-  const [workouts, setWorkouts] = useState([])
-  const [appointments, setAppointments] = useState([])
+  // const [workouts, setWorkouts] = useState([])
+  // const [appointments, setAppointments] = useState([])
 
   // function handleDelete(deletedId){
   //   console.log(deletedId)
@@ -37,25 +37,26 @@ function App() {
   //     setClients(data)})
   // }, [])
 
-  useEffect(() => {
-    fetch('/api/workoutprograms')
-      .then((r => r.json()))
-      .then(data =>setWorkouts(data))
-  }, [])
+  // useEffect(() => {
+  //   fetch('/api/workoutprograms')
+  //     .then((r => r.json()))
+  //     .then(data =>setWorkouts(data))
+  // }, [])
 
-  useEffect(() => {
-    fetch('/api/appointments')
-      .then(response => response.json())
-      .then(data => setAppointments(data))
-      .catch(error => console.error('Error fetching appointments:', error));
-  }, []);
-  
-
+  // useEffect(() => {
+  //   fetch('/api/appointments')
+  //     .then(response => response.json())
+  //     .then(data => setAppointments(data))
+  //     .catch(error => console.error('Error fetching appointments:', error));
+  // }, []);
+ 
   return (
     <Router>
       <Header />
       <NavBar />
       <ClientsProvider>
+      <WorkoutsProvider>
+      <AppointmentsProvider>
       <Routes>
         <Route path='/' element = {<ClientList 
           // clients = {clients} 
@@ -69,39 +70,31 @@ function App() {
           />}
         />
         <Route path='/workoutform' element = {<WorkoutForm 
-          workouts = {workouts}
-          setWorkouts = {setWorkouts}
+          // workouts = {workouts}
+          // setWorkouts = {setWorkouts}
           />} 
         />
         <Route path='/sessionform' element = { <SessionForm 
           // clients = {clients}
           // setClients = {setClients}
-          workouts = {workouts}
-          setWorkouts = {setWorkouts}
+          // workouts = {workouts}
+          // setWorkouts = {setWorkouts}
           />} 
         />
         <Route path='/clients/:id' element = {<ClientSession 
         // clients = {clients}
         />} />
-        <Route path='/mycalendar' element = {<AppointmentsCalendar appointments = {appointments} setAppointments = {setAppointments}/>} />
+        <Route path='/mycalendar' element = {<AppointmentsCalendar 
+        // appointments = {appointments} setAppointments = {setAppointments}
+        />} 
+      />
         
       </Routes>
+      </AppointmentsProvider>
+      </WorkoutsProvider>
       </ClientsProvider>
     </Router>
   )
 }
 
 export default App
-
-// return (
-//   <div className='app'>
-//     <Header />
-//     <NavBar />
-//     <ul className='cards'>
-//       {clientCard}
-//     </ul>
-    
-//   </div>
-
-// )
-// }

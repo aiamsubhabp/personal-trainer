@@ -3,8 +3,12 @@ import 'react-calendar/dist/Calendar.css';
 import AppointmentsList from './AppointmentsList';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useContext } from 'react';
+import { AppointmentsContext } from '../context/AppointmentsContext';
 
-const AppointmentsCalendar = ({ appointments, setAppointments }) => {
+const AppointmentsCalendar = () => {
+
+    const {appointments, setAppointments} = useContext(AppointmentsContext)
 
     const formSchema = yup.object().shape({
         name: yup.string().required('Name is required').min(3).max(30),
