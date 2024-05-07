@@ -1,5 +1,6 @@
 from sqlalchemy_serializer import SerializerMixin
 from config import db, metadata
+from sqlalchemy.orm import validates
 import datetime
 
 client_workout_programs = db.Table(
@@ -20,6 +21,18 @@ class Client(db.Model, SerializerMixin):
     weight = db.Column(db.Integer)
     goals = db.Column(db.String)
     image = db.Column(db.String)
+
+    @validates('age')
+    def validate_age(self, key, age):
+        if int(age) > 120:
+            raise ValueError('age must be less than 120')
+        return age
+    
+    @validates('weight')
+    def validate_weight(self, key, weight):
+        if int(weight) > 999:
+            raise ValueError('weight must be less than 999') 
+        return weight
 
     sessions = db.relationship('Session', back_populates = 'client')
     # add db relationship for workouts... secondary
@@ -52,8 +65,6 @@ class Session(db.Model, SerializerMixin):
     client = db.relationship('Client', back_populates = 'sessions')
     workout_program = db.relationship('WorkoutProgram', back_populates = 'sessions')
 
-
-# Note, currently no relationship. if we do add in the users, we will need to create the relationship
 class Appointment(db.Model, SerializerMixin):
     __tablename__ = 'appointments'
 
