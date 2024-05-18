@@ -89,7 +89,9 @@ const AppointmentsCalendar = () => {
         <form onSubmit={formik.handleSubmit}>
             <div>
             <Calendar 
-                onChange={date => formik.setFieldValue('date', date)} 
+                onChange={date => {
+                    // console.log('Selected date:', date)
+                    formik.setFieldValue('date', date)}} 
                 value={formik.values.date} 
                 showNeighboringMonth = {false}
             />
