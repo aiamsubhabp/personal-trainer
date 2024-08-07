@@ -5,6 +5,10 @@
  - Additionally, the user is able to edit and delete clients as well.
  - There is also a feature for the user to schedule appointments using a calendar and time slot system. 
 
+## App Demonstration
+<iframe width="560" height="315" src="https://youtu.be/xfz7du9NPU4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
 ## Routes
 - There are five routes located in the app.py file. 
 - The Clients route contains methods for get and post requests.
