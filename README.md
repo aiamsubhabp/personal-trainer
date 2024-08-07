@@ -6,8 +6,8 @@
  - There is also a feature for the user to schedule appointments using a calendar and time slot system. 
 
 ## App Demonstration
-<iframe width="560" height="315" src="https://youtu.be/xfz7du9NPU4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+[![App Demo](assets/screenshots/personalTrainerScreenShot.png)](https://youtu.be/xfz7du9NPU4)
+*Click the image to watch the demo video*
 
 ## Routes
 - There are five routes located in the app.py file. 
