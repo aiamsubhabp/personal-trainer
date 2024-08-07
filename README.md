@@ -25,3 +25,6 @@
 ## Roadmap
 - Allow the user to customize the workout programs to include specific exercises.
 - Allow full CRUD for the WorkoutPrograms and Sessions.
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
